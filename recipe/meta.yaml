@@ -1,4 +1,4 @@
-{% set version = "1.0.3" %}
+{% set version = "1.0.4" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/fasterize_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/fasterize/fasterize_{{ version }}.tar.gz
-  sha256: 62b459625e9bdb00251ec5f6cb873e0c59713f3e86dc1e2c8332adc0cea17f81
+  sha256: 44efbde363345c7fc494599392ff538eaef8ffcc8cae48d78350b5eea3887db2
 
 build:
   merge_build_host: true  # [win]
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
