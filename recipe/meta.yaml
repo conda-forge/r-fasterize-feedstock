@@ -1,4 +1,4 @@
-{% set version = "1.0.5" %}
+{% set version = "1.1.0" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/fasterize_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/fasterize/fasterize_{{ version }}.tar.gz
-  sha256: d44f101aec29aee285c4c7b578e26d11b6add423336ace90a7c22e07cfc1c3b4
+  sha256: 231aa04f505ec08162edfc3f3a410205a2bfde6c3261415ef7258f1ddab2375f
 
 build:
   merge_build_host: true  # [win]
@@ -22,7 +22,9 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}          # [not win]
+    - {{ stdlib("c") }}            # [not win]
     - {{ compiler('m2w64_c') }}    # [win]
+    - {{ stdlib("m2w64_c") }}      # [win]
     - {{ compiler('cxx') }}        # [not win]
     - {{ compiler('m2w64_cxx') }}  # [win]
     - {{ posix }}filesystem        # [win]
@@ -52,12 +54,8 @@ test:
 about:
   home: https://github.com/ecohealthalliance/fasterize
   license: MIT
-  summary: Provides a drop-in replacement for rasterize() from the 'raster'
-    package that takes polygon vector or data frame objects, and is much faster. 
-    There is support for the main options provided by the rasterize() function, 
-    including setting the field used and background value, and options for 
-    aggregating multi-layer rasters. Uses the scan line algorithm attributed to
-    Wylie et al. (1967) <doi:10.1145/1465611.1465619>.
+  summary: Provides a drop-in replacement for rasterize() from the 'raster' package that takes polygon vector or data frame objects, and is much faster. There is support for the main options provided by the rasterize() function, including setting the field used and background value, and options for aggregating multi-layer
+    rasters. Uses the scan line algorithm attributed to Wylie et al. (1967) <doi:10.1145/1465611.1465619>.
   license_family: MIT
   license_file:
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
