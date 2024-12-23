@@ -34,6 +34,7 @@ requirements:
     - {{ posix }}zip               # [win]
   host:
     - r-base
+    - r-codetools
     - r-rcpp
     - r-rcpparmadillo
     - r-raster >=2.8_3
@@ -46,6 +47,8 @@ requirements:
     - r-wk
 
 test:
+  requires:
+    - r-codetools
   commands:
     - $R -e "library('fasterize')"           # [not win]
     - "\"%R%\" -e \"library('fasterize')\""  # [win]
