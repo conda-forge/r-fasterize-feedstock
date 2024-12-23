@@ -1,6 +1,5 @@
 {% set version = "1.1.0" %}
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-fasterize
@@ -13,11 +12,12 @@ source:
   sha256: 231aa04f505ec08162edfc3f3a410205a2bfde6c3261415ef7258f1ddab2375f
 
 build:
-  merge_build_host: true  # [win]
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
+  ## NB: missing win r-raster (track https://github.com/conda-forge/r-raster-feedstock/issues/34)
+  skip: true  # [win]
 
 requirements:
   build:
@@ -34,19 +34,21 @@ requirements:
     - {{ posix }}zip               # [win]
   host:
     - r-base
+    - r-codetools
     - r-rcpp
     - r-rcpparmadillo
     - r-raster >=2.8_3
     - r-wk
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
     - r-rcpp
     - r-rcpparmadillo
     - r-raster >=2.8_3
     - r-wk
 
 test:
+  requires:
+    - r-codetools
   commands:
     - $R -e "library('fasterize')"           # [not win]
     - "\"%R%\" -e \"library('fasterize')\""  # [win]
