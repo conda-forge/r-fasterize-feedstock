@@ -16,6 +16,8 @@ build:
   rpaths:
     - lib/R/lib/
     - lib/
+  ## NB: missing win r-raster (track https://github.com/conda-forge/r-raster-feedstock/issues/34)
+  skip: true  # [win]
 
 requirements:
   build:
